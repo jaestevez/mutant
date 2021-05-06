@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component()
 public class MapperMatrixImpl implements MapperMatrix {
     /**
-     *
+     * Convierte la entrada(arreglo) en una matrix
      * @param dna
      * @return
      */

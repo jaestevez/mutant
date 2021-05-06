@@ -24,7 +24,7 @@ public class ValidationMutantImpl implements ValidationMutant {
     private MapperMatrix mapperMatrix;
 
     /**
-     *
+     * Validación de filas y columnas
      * @param matrix
      * @param accumulated
      * @return
@@ -51,7 +51,7 @@ public class ValidationMutantImpl implements ValidationMutant {
     }
 
     /**
-     *
+     * Validación de diagonales de derecha superior a izquierda inferior
      * @param matrix
      * @param occurrencies
      * @return
@@ -72,7 +72,7 @@ public class ValidationMutantImpl implements ValidationMutant {
     }
 
     /**
-     *
+     * Validación de diagonales de izquierda superior a derecha inferior
      * @param matrix
      * @param occurrencies
      * @return
@@ -95,7 +95,7 @@ public class ValidationMutantImpl implements ValidationMutant {
     }
 
     /**
-     *
+     * Valida si un dna tiene hasta dos conincidencias
      * @param dna
      * @return
      * @throws UnsupportedLetter
@@ -122,7 +122,7 @@ public class ValidationMutantImpl implements ValidationMutant {
     }
 
     /**
-     *
+     * Validación por linea de las coincidencias
      * @param group
      * @param x
      * @param y

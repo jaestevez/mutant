@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public class Utils {
     /**
-     *
+     * Valida si la entrada es NxN
      * @param dna
      * @return
      */
