@@ -1,8 +1,8 @@
 package com.example.mutant.app.dao.impl;
 
-import com.example.mutant.app.dao.DataStoreInstance;
+import com.example.mutant.app.dao.DataStoreDAO;
 import com.example.mutant.app.dao.StatsDAO;
-import com.example.mutant.app.utils.Constants;
+import com.example.mutant.app.utils.ValidationType;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.Key;
 import com.google.cloud.datastore.Query;
@@ -10,7 +10,7 @@ import com.google.cloud.datastore.QueryResults;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StatsDAOImpl extends DataStoreInstance implements StatsDAO{
+public class StatsDAOImpl extends DataStoreDAO implements StatsDAO{
     /**
      * Consulta de estadisticas
      * @return
@@ -28,21 +28,24 @@ public class StatsDAOImpl extends DataStoreInstance implements StatsDAO{
     /**
      * Actualiza o crea las estadisticas
      * @param kind
+     * @return
      */
-    public void insertOrUpdateStats(String kind) {
-        Entity entity = getStats();
-        if (entity == null) {
+    public Entity insertOrUpdateStats(String kind) {
+        Entity entity = null;
+        Entity entityIn = getStats();
+        if (entityIn == null) {
             //insert
             Key taskKey = datastore.newKeyFactory().setKind("Stats").newKey("stats_check");
             Entity stat = Entity.newBuilder(taskKey)
-                    .set(Constants.DS_TYPE_MUTANT, kind.equals(Constants.DS_TYPE_MUTANT) ? 1L : 0L)
-                    .set(Constants.DS_TYPE_HUMAN, kind.equals(Constants.DS_TYPE_HUMAN) ? 1L : 0L)
+                    .set(ValidationType.DS_TYPE_MUTANT.type, kind.equals(ValidationType.DS_TYPE_MUTANT.type) ? 1L : 0L)
+                    .set(ValidationType.DS_TYPE_HUMAN.type, kind.equals(ValidationType.DS_TYPE_HUMAN.type) ? 1L : 0L)
                     .build();
-            datastore.put(stat);
+            entity = datastore.add(stat);
         } else {
             //update
-            Entity task = Entity.newBuilder(entity).set(kind, entity.getLong(kind) + 1).build();
-            datastore.update(task);
+            entity = Entity.newBuilder(entityIn).set(kind, entityIn.getLong(kind) + 1).build();
+            datastore.update(entity);
         }
+        return entity;
     }
 }

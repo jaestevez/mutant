@@ -1,6 +1,5 @@
 package com.example.mutant.app.dto;
 
-import java.util.Arrays;
 
 public class MutantDTO {
     private String[] dna;
@@ -13,10 +12,4 @@ public class MutantDTO {
         this.dna = dna;
     }
 
-    @Override
-    public String toString() {
-        return "MatrixDTO{" +
-                "dna=" + Arrays.toString(dna) +
-                '}';
-    }
 }

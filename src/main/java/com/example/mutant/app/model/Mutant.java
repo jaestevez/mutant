@@ -7,15 +7,6 @@ public class Mutant {
     private boolean result;
     private Timestamp created;
 
-    public Mutant(){
-
-    }
-    public Mutant(String dna, boolean result, Timestamp created) {
-        this.dna = dna;
-        this.result = result;
-        this.created = created;
-    }
-
     public String getDna() {
         return dna;
     }

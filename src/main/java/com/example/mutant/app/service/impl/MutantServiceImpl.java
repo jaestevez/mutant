@@ -8,7 +8,7 @@ import com.example.mutant.app.exception.UnsupportedDimensionArray;
 import com.example.mutant.app.exception.UnsupportedLetter;
 import com.example.mutant.app.model.Mutant;
 import com.example.mutant.app.service.MutantService;
-import com.example.mutant.app.utils.Constants;
+import com.example.mutant.app.utils.ValidationType;
 import com.google.cloud.Timestamp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,10 +35,13 @@ public class MutantServiceImpl implements MutantService {
      */
     public boolean validateMutant(MutantDTO mutant) throws UnsupportedLetter, UnsupportedDimensionArray {
         boolean result = validation.isMutant(mutant.getDna());
-        Mutant mutantModel = new Mutant(Arrays.toString(mutant.getDna()), result, Timestamp.now());
+        Mutant mutantModel = new Mutant();
+        mutantModel.setDna(Arrays.toString(mutant.getDna()));
+        mutantModel.setResult(result);
+        mutantModel.setCreated(Timestamp.now());
         log.info("validation: ".concat(mutantModel.toString()));
         mutantDAO.saveMutant(mutantModel);
-        statsDAO.insertOrUpdateStats(result ? Constants.DS_TYPE_MUTANT : Constants.DS_TYPE_HUMAN);
+        statsDAO.insertOrUpdateStats(result ? ValidationType.DS_TYPE_MUTANT.type : ValidationType.DS_TYPE_HUMAN.type);
         return result;
     }
 }

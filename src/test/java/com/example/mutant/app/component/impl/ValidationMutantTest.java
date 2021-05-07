@@ -2,11 +2,13 @@ package com.example.mutant.app.component.impl;
 
 import com.example.mutant.app.SpringbootApplication;
 import com.example.mutant.app.component.ValidationMutant;
+import com.example.mutant.app.dao.impl.DataStoreFactory;
 import com.example.mutant.app.exception.UnsupportedDimensionArray;
 import com.example.mutant.app.exception.UnsupportedLetter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -18,6 +20,8 @@ import static org.junit.Assert.assertTrue;
 public class ValidationMutantTest {
     @Autowired
     private ValidationMutant validation;
+    @MockBean
+    private DataStoreFactory dataStoreFactory;
 
     @Test
     public void testMutantHorizontalVerticalMatch() throws UnsupportedLetter {

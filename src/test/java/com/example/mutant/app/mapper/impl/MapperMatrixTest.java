@@ -1,10 +1,13 @@
 package com.example.mutant.app.mapper.impl;
 
 import com.example.mutant.app.SpringbootApplication;
+import com.example.mutant.app.dao.MutantDAO;
+import com.example.mutant.app.dao.StatsDAO;
 import com.example.mutant.app.mapper.MapperMatrix;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -16,6 +19,10 @@ public class MapperMatrixTest {
 
     @Autowired
     private MapperMatrix mapperMatrix;
+    @MockBean
+    private MutantDAO mutantDAO;
+    @MockBean
+    private StatsDAO statsDAO;
 
     @Test
     public void testMapperToMatrix(){

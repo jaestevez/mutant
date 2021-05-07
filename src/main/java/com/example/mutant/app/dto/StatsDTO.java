@@ -9,16 +9,6 @@ public class StatsDTO {
     private long countHumanDna;
     private float ratio;
 
-    public StatsDTO(){
-
-    }
-
-    public StatsDTO(long countMutantDna, long countHumanDna, float ratio) {
-        this.countMutantDna = countMutantDna;
-        this.countHumanDna = countHumanDna;
-        this.ratio = ratio;
-    }
-
     public long getCountMutantDna() {
         return countMutantDna;
     }

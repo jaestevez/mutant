@@ -2,6 +2,8 @@ package com.example.mutant.app.service.impl;
 
 import com.example.mutant.app.SpringbootApplication;
 import com.example.mutant.app.component.ValidationMutant;
+import com.example.mutant.app.dao.MutantDAO;
+import com.example.mutant.app.dao.StatsDAO;
 import com.example.mutant.app.dto.MutantDTO;
 import com.example.mutant.app.service.MutantService;
 import org.junit.Test;
@@ -24,6 +26,10 @@ public class MutantServiceTest {
 
     @MockBean
     private ValidationMutant validation;
+    @MockBean
+    private MutantDAO mutantDAO;
+    @MockBean
+    private StatsDAO statsDAO;
 
     @Test
     public void testValidateMutantNoOk(){
