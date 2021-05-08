@@ -9,6 +9,7 @@ import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.Key;
 import com.google.cloud.datastore.testing.LocalDatastoreHelper;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.threeten.bp.Duration;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -39,6 +42,15 @@ public class StatsServiceTest {
     public void setUp() throws IOException, InterruptedException {
         localDatastoreHelper.start();
         datastore = localDatastoreHelper.getOptions().getService();
+    }
+
+    @After
+    public void tearDown() {
+        try {
+            localDatastoreHelper.stop(Duration.ofSeconds(5000));
+        } catch (IOException | InterruptedException | TimeoutException e) {
+
+        }
     }
 
     @Test

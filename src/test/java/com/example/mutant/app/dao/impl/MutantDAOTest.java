@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.threeten.bp.Duration;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -37,6 +38,15 @@ public class MutantDAOTest {
     public void setUp() throws IOException, InterruptedException {
         localDatastoreHelper.start();
         datastore = localDatastoreHelper.getOptions().getService();
+    }
+
+    @After
+    public void tearDown() {
+        try {
+            localDatastoreHelper.stop(Duration.ofSeconds(5000));
+        } catch (IOException | InterruptedException | TimeoutException e) {
+
+        }
     }
 
     @Test

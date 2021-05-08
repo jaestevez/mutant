@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.threeten.bp.Duration;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -35,6 +36,15 @@ public class StatsDAOTest {
     public void setUp() throws IOException, InterruptedException {
         localDatastoreHelper.start();
         datastore = localDatastoreHelper.getOptions().getService();
+    }
+
+    @After
+    public void tearDown() {
+        try {
+            localDatastoreHelper.stop(Duration.ofSeconds(5000));
+        } catch (IOException | InterruptedException | TimeoutException e) {
+
+        }
     }
 
     @Test
@@ -61,8 +71,15 @@ public class StatsDAOTest {
     }
 
     @Test
-    public void testCreateStatsOk(){
+    public void testCreateStatsWithData(){
         dataSet();
+        DataStoreDAO.setDatastore(datastore);
+        Entity result = statsDAO.insertOrUpdateStats(ValidationType.DS_TYPE_MUTANT.type);
+        assertNotNull(result);
+    }
+
+    @Test
+    public void testCreateStatsWithoutData(){
         DataStoreDAO.setDatastore(datastore);
         Entity result = statsDAO.insertOrUpdateStats(ValidationType.DS_TYPE_MUTANT.type);
         assertNotNull(result);
