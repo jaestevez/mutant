@@ -12,7 +12,7 @@ public class Utils {
     public static boolean isValidArrayDimension(String[] dna){
         if(dna == null || dna.length == 0)
             return false;
-        int initialSize = dna[0].length();
+        int initialSize = dna.length;
         Optional<Integer> element = Arrays.stream(dna).map((String item)-> item.length())
                 .filter(item -> item != initialSize)
                 .findFirst();

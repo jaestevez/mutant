@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 public class UtilsTest {
 
     @Test
-    public void testValidArrayDimension() {
+    public void testValidArrayDimension6Rows() {
         final String [] dna = {
                 "ATGCGA",
                 "CTGAGC",
@@ -16,6 +16,20 @@ public class UtilsTest {
                 "ATGCAG",
                 "CGTATA",
                 "TCATTC"
+        };
+        assertTrue(Utils.isValidArrayDimension(dna));
+    }
+
+    @Test
+    public void testValidArrayDimension7Rows() {
+        final String [] dna = {
+                "ATGCGAA",
+                "CTGAGCA",
+                "TACGGAA",
+                "ATGCAGA",
+                "CGTATAA",
+                "TCATTCA",
+                "TCATTCA"
         };
         assertTrue(Utils.isValidArrayDimension(dna));
     }
@@ -29,6 +43,19 @@ public class UtilsTest {
                 "ATGCAGA",
                 "CGTATAA",
                 "TCATTC"
+        };
+        assertFalse(Utils.isValidArrayDimension(dna));
+    }
+
+    @Test
+    public void testNotValidArrayDimensionMissinARow() {
+        final String [] dna = {
+                "ATGCGAA",
+                "CTGAGCA",
+                "TACGGAA",
+                "ATGCAGA",
+                "CGTATAA",
+                "TCATTCA"
         };
         assertFalse(Utils.isValidArrayDimension(dna));
     }

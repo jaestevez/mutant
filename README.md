@@ -52,7 +52,10 @@ POST https://<your-project-id>.appspot.com/mutant
     ]
 }
 ```
-La respuesta sera 200 en caso de ser un mutante, 403 en caso de ser un humano y 400 en caso de tener problemas en los datos de entrada. 
+Las respuestas del servicio son las siguientes: 
+- 200 - En caso de ser un mutante. 
+- 400 - En caso de tener problemas en los datos de entrada.
+- 403 - En caso de ser un humano.  
 
 Obtener estadisticas de las validaciones realizadas:
 ```
